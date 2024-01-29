@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Payment\TripayController;
+use App\Http\Controllers\Transaction\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [TripayController::class, 'getPaymentChannels'])->name('test_tripay');
+Route::get('/transaction', [TransactionController::class, 'index'])->name('transaction.index');
+Route::post('/transaction/save', [TransactionController::class, 'store'])->name('transaction.store');
+Route::get('/transaction/detail/{reference}', [TransactionController::class, 'detail'])->name('transaction.detail');
